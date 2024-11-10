@@ -111,10 +111,10 @@ const TaskList = () => {
     }
   };
 
-  const logout = () => {
-    localStorage.removeItem('authToken');
-    navigate('/login');
-  };
+    const logout = () => {
+      localStorage.removeItem('authToken');
+      navigate('/login');
+    };
 
   return (
     <div

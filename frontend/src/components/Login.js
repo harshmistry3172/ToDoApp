@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -6,6 +6,15 @@ const Login = ({ setIsAuthenticated }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+
+  // Automatically reload the page if user is already authenticated
+  useEffect(() => {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      setIsAuthenticated(true);
+      navigate('/'); // Redirect to home or task list if authenticated
+    }
+  }, [navigate, setIsAuthenticated]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
