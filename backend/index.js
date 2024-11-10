@@ -8,7 +8,16 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
-app.use(cors());
+const allowedOrigins = ['*'];
+
+app.use(
+  cors({
+    origin: allowedOrigins, // Set allowed origins
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Set allowed methods
+    allowedHeaders: ['Content-Type', 'Authorization'], // Set allowed headers
+  })
+);
+
 app.use(express.json());
 
 // MongoDB Connection
