@@ -12,7 +12,7 @@ const Signup = () => {
     console.log(email, password);
     
     try {
-      const response = await axios.post('http://localhost:5000/api/users/signup', { email, password });
+      const response = await axios.post('https://todoapp-7zyq4d4s.b4a.run/api/users/signup', { email, password });
       console.log('Signup successful:', response);
       navigate('/login'); // Redirect to login after successful signup
     } catch (error) {

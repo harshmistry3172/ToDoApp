@@ -22,7 +22,7 @@ const TaskList = () => {
           const userId = decodedToken.userId;
 
           axios
-            .get('http://localhost:5000/api/users/user', {
+            .get('https://todoapp-7zyq4d4s.b4a.run/api/users/user', {
               headers: { Authorization: `Bearer ${token}` },
             })
             .then((response) => {
@@ -39,7 +39,7 @@ const TaskList = () => {
 
     const fetchTasks = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/tasks', {
+        const response = await axios.get('https://todoapp-7zyq4d4s.b4a.run/api/tasks', {
           headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` },
         });
         setTasks(response.data);
@@ -55,7 +55,7 @@ const TaskList = () => {
   const addTask = async () => {
     try {
       const response = await axios.post(
-        'http://localhost:5000/api/tasks',
+        'https://todoapp-7zyq4d4s.b4a.run/api/tasks',
         { task: newTask, priority },
         { headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` } }
       );
@@ -70,7 +70,7 @@ const TaskList = () => {
   const updateTask = async (taskId, completed, taskPriority, taskText) => {
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/tasks/${taskId}`,
+        `https://todoapp-7zyq4d4s.b4a.run/api/tasks/${taskId}`,
         { text: taskText, completed, priority: taskPriority },
         { headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` } }
       );
@@ -83,7 +83,7 @@ const TaskList = () => {
 
   const deleteTask = async (taskId) => {
     try {
-      await axios.delete(`http://localhost:5000/api/tasks/${taskId}`, {
+      await axios.delete(`https://todoapp-7zyq4d4s.b4a.run/api/tasks/${taskId}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` },
       });
       setTasks(tasks.filter((task) => task._id !== taskId));
@@ -126,6 +126,7 @@ const TaskList = () => {
         borderRadius: '10px',
         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
         fontFamily: 'Arial, sans-serif',
+        justifyContent: 'space-evenly'
       }}
     >
       <h2 style={{ fontSize: '24px', color: '#333', textAlign: 'center', marginBottom: '1.5rem' }}>Your Tasks</h2>
@@ -217,7 +218,7 @@ const TaskList = () => {
             key={task._id}
             style={{
               display: 'flex',
-              // justifyContent: 'space-between',
+              justifyContent: 'space-around',
               alignItems: 'center',
               padding: '0.75rem',
               marginBottom: '10px',
@@ -256,7 +257,7 @@ const TaskList = () => {
               <option value="High">High</option>
             </select>
 
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', marginLeft: '35%'}}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start'}}>
   <button
     onClick={() => startEdit(task)}
     style={{
